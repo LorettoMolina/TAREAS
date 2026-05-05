@@ -3,25 +3,28 @@ from src.controllers.UserController import AuthController
 from src.controllers.TareasController import TareaController
 from views.LoginView import LoginView
 from views.dashbooard import DashboardView
-
+from views.RegisterView import RegisterView
 def start(page: ft.Page):
 
     auth_ctrl = AuthController()
     task_ctrl = TareaController()
 
     def route_change(e):
-        page.controls.clear()
+      page.controls.clear()
 
-        if page.route == "/":
-            page.controls.append(LoginView(page, auth_ctrl))
+    if page.route == "/":
+        page.controls.append(LoginView(page, auth_ctrl))
 
-        elif page.route == "/dashboard":
-            page.controls.append(DashboardView(page, task_ctrl))
+    elif page.route == "/registro":
+        page.controls.append(RegisterView(page, auth_ctrl))
 
-        else:
-            page.controls.append(ft.Text("Ruta no encontrada"))
+    elif page.route == "/dashboard":
+        page.controls.append(DashboardView(page, task_ctrl))
 
-        page.update()
+    else:
+        page.controls.append(ft.Text("Ruta no encontrada"))
+
+    page.update()
 
     page.on_route_change = route_change
 
